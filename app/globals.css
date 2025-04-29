@@ -1,26 +1,184 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #191F28;
+  --background: #F9FAFB;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior-y: none;
+  }
+  
+  body {
+    @apply text-gray-900 bg-gray-50 dark:text-gray-100;
+    height: 100%;
+    overscroll-behavior-y: none;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* 기본 링크 스타일 */
+  a {
+    @apply text-blue-500 hover:text-blue-600 transition-colors;
+  }
+
+  /* 기본 버튼 스타일 */
+  button {
+    @apply transition-all duration-200;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .input {
+    @apply w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100;
+  }
+
+  .label {
+    @apply block mb-2 text-sm font-medium text-gray-900 dark:text-gray-100;
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 ease-in-out;
+  }
+
+  .btn-primary {
+    @apply bg-blue-500 text-white hover:bg-blue-600 shadow hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600;
+  }
+
+  .card {
+    @apply rounded-2xl bg-white border border-gray-100 shadow-sm;
+  }
+
+  .dark .card {
+    @apply bg-gray-800 border-gray-700;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-md;
+  }
+
+  .dark .card-hover {
+    @apply hover:bg-gray-700;
+  }
+
+  /* 거래 내역 카드 스타일 */
+  .transaction-card {
+    @apply p-4 rounded-xl bg-white border border-gray-100;
+  }
+
+  .dark .transaction-card {
+    @apply bg-gray-800 border-gray-700;
+  }
+
+  /* 텍스트 가독성 개선 */
+  .dark .text-gray-600 {
+    @apply text-gray-300;
+  }
+
+  .dark .text-gray-500 {
+    @apply text-gray-400;
+  }
+
+  .progress-bar {
+    @apply relative h-2 bg-gray-100 rounded-full overflow-hidden dark:bg-gray-700;
+  }
+
+  .progress-bar-fill {
+    @apply absolute top-0 left-0 h-full rounded-full transition-all duration-500 ease-out bg-blue-500;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply bg-blue-50 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300;
+  }
+
+  .badge-green {
+    @apply bg-green-50 text-green-800 dark:bg-green-900/20 dark:text-green-400;
+  }
+
+  .badge-red {
+    @apply bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400;
+  }
+
+  /* 네비게이션 아이템 */
+  .nav-item {
+    @apply flex items-center gap-2 px-4 py-2 rounded-lg text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800;
+  }
+
+  .nav-item.active {
+    @apply bg-blue-50 text-blue-500 dark:bg-blue-900/20;
+  }
+
+  /* 플로팅 버튼 */
+  .floating-button {
+    @apply fixed bottom-20 right-6 p-4 rounded-full bg-blue-500 text-white shadow-lg hover:bg-blue-600 hover:shadow-xl transition-all duration-200;
+  }
+
+  /* 카테고리 버튼 */
+  .category-button {
+    @apply px-4 py-2 rounded-lg text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors;
+  }
+
+  .category-button.active {
+    @apply bg-blue-50 text-blue-500 dark:bg-blue-900/20 dark:text-blue-300;
+  }
+
+  /* 메인 컨테이너 - 상단 패딩 제거 */
+  .main-container {
+    @apply p-6 max-w-2xl mx-auto space-y-6;
+  }
+
+  /* 섹션 헤더 */
+  .section-header {
+    @apply text-lg font-medium text-gray-900 dark:text-white mb-4;
+  }
+
+  /* 리스트 아이템 */
+  .list-item {
+    @apply flex items-center justify-between p-4 hover:bg-gray-50/5 dark:hover:bg-gray-700/50 transition-colors rounded-lg;
+  }
+
+  /* 금액 텍스트 */
+  .amount-text {
+    @apply text-blue-500 dark:text-blue-300 font-medium;
+  }
+
+  /* 설명 텍스트 */
+  .description-text {
+    @apply text-sm text-gray-500 dark:text-gray-400;
+  }
+
+  /* 하단 네비게이션 */
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700;
+  }
+
+  .bottom-nav-item {
+    @apply flex flex-col items-center justify-center flex-1 h-full transition-colors;
+  }
+
+  .bottom-nav-item.active {
+    @apply text-blue-500;
+  }
+
+  .bottom-nav-item:not(.active) {
+    @apply text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-500;
+  }
+
+  /* 페이지 컨테이너 */
+  .page-container {
+    @apply p-4 pb-20;
+  }
 }
